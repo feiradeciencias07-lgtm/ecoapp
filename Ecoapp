@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoApp</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff;
+    }
+    header {
+      background: #2e8b57;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    header img {
+      height: 50px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+    .menu {
+      padding: 15px;
+      display: flex;
+      justify-content: space-around;
+      background: #f0f0f0;
+      flex-wrap: wrap;
+    }
+    .menu button {
+      padding: 10px;
+      background: #2e8b57;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    .menu button:hover {
+      background: #256d47;
+    }
+    #formulario {
+      display: none;
+      padding: 15px;
+    }
+    #formulario input, #formulario textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    #formulario button {
+      padding: 10px;
+      background: #2e8b57;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #f0f0f0;
+      color: #555;
+    }
+    .aviso {
+      background: yellow;
+      text-align: center;
+      padding: 5px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Logo do EcoApp">
+    <h1>EcoApp</h1>
+  </header>
+
+  <div class="aviso">⚠️ Este mapa é apenas uma demonstração</div>
+
+  <div id="map"></div>
+
+  <div class="menu">
+    <button onclick="abrirFormulario('lixo')">🚛 Reportar Caminhão de Lixo</button>
+    <button onclick="abrirFormulario('queimada')">🔥 Denunciar Queimada</button>
+    <button onclick="abrirFormulario('reportar')">📍 Fazer um Reporte</button>
+  </div>
+
+  <div id="formulario">
+    <h2 id="titulo-form"></h2>
+    <input type="text" placeholder="Digite sua comunidade">
+    <textarea placeholder="Descreva aqui..."></textarea>
+    <button>Enviar</button>
+  </div>
+
+  <footer>
+    <p>EcoApp - Projeto da Feira de Ciências</p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Criar mapa com Leaflet
+    var map = L.map('map').setView([-4.1867, -38.1300], 11); // Centro em Beberibe-CE
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+
+    // Função para abrir formulário
+    function abrirFormulario(tipo) {
+      document.getElementById('formulario').style.display = 'block';
+      if (tipo === 'lixo') document.getElementById('titulo-form').innerText = 'Reportar Caminhão de Lixo';
+      if (tipo === 'queimada') document.getElementById('titulo-form').innerText = 'Denunciar Queimada';
+      if (tipo === 'reportar') document.getElementById('titulo-form').innerText = 'Fazer um Reporte';
+    }
+  </script>
+</body>
+  </html>
